@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Organizer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            overflow-x: auto;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+#grid_col
+{
+display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Three columns with equal width */
+    gap: 20px; /* Adjust the gap between columns as needed */
+    width: 100%; /* Occupy full width of the container */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        section {
+            margin: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+            max-height: 100vh;
+overflow:auto;
+        }
+
+        section h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .about-us-frame,
+        .contact-frame,
+        .location-frame {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 20px;
+text-align:center;
+        }
+
+        .about-us-info,
+        .contact-info,
+        .location-info {
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: justify;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .home-grids {
+            display: grid;
+            grid-template-columns: 20% 55% 25%;
+            gap: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .club-frame {
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .info-frame {
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: justify;
+        }
+
+        .notification-frame {
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .notification-bar {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 100%; /* Limit the width to the container's width */
+    margin: 0 auto; /* Center the notification bar */
+}
+
+      .clubs-container {
+    display: grid;
+ 
+    gap: 20px;
+    margin: 20px;
+    overflow: auto;
+}
+
+.club {
+    display: grid;
+    /* One column for each club */
+    gap: 20px;
+    margin-bottom: 20px;
+    text-align: center; /* Optional: Center-align text */
+}
+.clubs {
+    display: grid;
+    /* One column for each club */
+    gap: 20px;
+    margin-bottom: 20px;
+    
+}
+
+
+.club-image
+.club-info {
+
+ grid-template-columns: repeat(2,1fr);
+    max-width: 100%; /* Ensure images don't exceed the container width */
+    height: auto;
+    border-radius: 8px;
+ text-align: justify;
+}
+
+
+        .footer-container {
+            clear: both;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+        }
+
+        .home-image {
+            width: 100%;
+            height: auto;
+        }
+ .home-image1 {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Center the image horizontally, if needed */
+}
+
+        /* Updated styles for the three sections in one division */
+        .about-us-frame,
+        .contact-frame,
+        .location-frame {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 20px;
+        }
+
+        /* Three columns for about us, contact, and location */
+        .about-us-info,
+        .contact-info,
+        .location-info {
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: justify;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .join-club-info {
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: justify;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            display: inline-block;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        /* Style for the hidden list */
+        .hidden-list {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 1;
+        }
+.home-image-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .quote-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            width: 80%;
+        }
+
+
+.home-image1 img {
+   position:realtive;
+width:100%;
+
+}
+
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+        <h1>Jaypee Institute of Information Technology</h1>
+<h2> Event Organizer </h2>
+    </header>
+
+    <nav>
+       <a href="#home">Home</a>
+        <a href="#clubs">Clubs</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact Us</a>
+        <a href="#location">Location</a>
+        <a href="#join-club">Join a Club</a>
+        <a href="#about-us">About Us</a>
+    </nav>
+
+    <main>
+        <section id="home">
+           <div class="home-image-container">
+                <!-- Add the image with the source (src) attribute pointing to your image file -->
+                <img class="home-image" src="C:\Users\anush\Downloads\home-banner-1.jpg" alt="College Event Organizer Image">
+
+                <!-- Add the quote overlay -->
+                <div class="quote-overlay">
+                    Turning Moments into Memories: Where Every Event is an Opportunity to Create Unforgettable Experiences.
+                </div>
+            </div>
+
+            <div class="home-grids">
+
+                <div class="club-frame">
+                    <h2>
+                        <!-- Three dots for the toggle button -->
+                        <span class="toggle-button" onclick="toggleClubList()">...</span>
+                        College Clubs
+                    </h2>
+                    <!-- Hidden list of clubs initially -->
+                    <div class="hidden-list" id="clubList">
+                        <ul>
+                            <li><a href="#club1" onclick="navigateToClub('club1')">YOGA, PRAHARI & HEALTH HUB</a></li>
+                            <li><a href="#club2" onclick="navigateToClub('club2')">Radiance</a></li>
+                            <li><a href="#club3" onclick="navigateToClub('club3')">CRESCENDO-MUSIC HUB</a></li>
+                            <li><a href="#club4" onclick="navigateToClub('club4')">JIIT PROGRAMMING HUB</a></li>
+                            <li><a href="#club5" onclick="navigateToClub('club5')">Parola</a></li>
+                            <li><a href="#club6" onclick="navigateToClub('club6')">Page Turner Society</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-frame">
+                    <h2>Why JIIT Organizes Events</h2>
+                    <p>Organizing events and fests is a vital component of a college experience, contributing significantly to the holistic development of students. These occasions serve as platforms for fostering a sense of community and camaraderie among students, providing them with opportunities to engage in diverse extracurricular activities. Events and fests offer a break from academic routines, allowing students to explore and showcase their talents, be it in the realms of arts, culture, sports, or academics. Through participation, students develop crucial life skills such as teamwork, leadership, and time management. Additionally, these events create a vibrant and dynamic campus atmosphere, enhancing the overall college environment. Beyond the immediate benefits for students, events and fests also play a role in strengthening the institution's identity, attracting prospective students, and fostering a positive image within the larger community. By encouraging creativity, collaboration, and a sense of pride, these gatherings contribute to the rich tapestry of the college experience, making it memorable and transformative for all involved.</p>
+                    <!-- Add more content as needed -->
+                </div>
+
+                <div class="notification-frame">
+                    <div class="notification-bar">
+                        <h2>Upcoming Events</h2>
+                        <p>Don't miss out on exciting events happening soon!</p>
+                        <!-- Add dynamic content or links to upcoming events -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="clubs">
+            <h2>Explore JIIT Hubs and Societies</h2>
+            <div class="clubs-container">
+                <!-- Division 1: First three clubs -->
+                <div id="club1" class="club">
+                   
+                    <div class="club-info">
+                        <h3>YOGA, PRAHARI & HEALTH HUB</h3>
+                        <p>Yoga, Prahari and Health hub is Wellness Club at Jaypee Institute of Information Technology, Noida. The hub is working towards a healthy and stress-free student life covering all wellness aspects as physical, emotional, spiritual, intellectual, etc. It conducts regular weekly Yoga and Meditation Sessions. To break from the routine, we invite a professional trainer to conduct specialized sessions. Along with these regular sessions we also celebrate "International Yoga Day" every year on June 21. The hub organizes Yoga session during Student Induction Program every year at the beginning of the academic session. The hub also conducts Health quizzes, Yoga competitions, poster making and other activities. As part of UP Govt. initiative ’’एकयुद्धनशेकेविरूद्ध’’, its Prahari division actively organizes events to raise awareness against drug abuse.</p>
+                    </div>
+ <div class="club-image">
+                        <img src="C:\Users\anush\Downloads\Yoga- Work Place.jpg"
+                    </div>
+                </div>
+
+                <div id="club2" class="club">
+                   
+                    <div class="club-info">
+                        <h3>Radiance</h3>
+                        <p>Fashion is not something which exists in dresses only: Fashion is in the sky, on campus; fashion has to do with the ideas, the way we live, the way we work.The effulgence of innocence and glow of mirth was felt as an audience to the exhibition of talents by the students and little faculty kids during these events. The stage events of Radiance came alive when the students presented an amalgamation of amplification of self confidence and extempore. These events focused at leveraging an opportunity to the students and little star kids to polish their skills by opening new vistas for them. The flagship of audience ignited the passion of the participants for performing arts and further stimulated them to deliver stupendous performance.
+
+Faculty Event Advisor: Dr. Chetna Dabas</p>
+                    </div>
+ <div class="club-image">
+                        <img src="C:\Users\anush\Downloads\gallery-4_2.jpg"
+                    </div>
+                </div>
+
+                <div id="club3" class="club">
+                    
+                    <div class="club-info">
+                        <h3>CRESCENDO-MUSIC HUB</h3>
+                        <p>A family of avid music enthusiasts who Perform, Promote and Propagate music. An open community that welcomes and motivates fellow students to unleash their Musical talents.
+
+Name of Faculty In-charge: S Krishna Sundari<br>
+Designation and Department of Faculty In-charge: Professor; Biotechnology Department
+Venue/office location to contact Faculty In-charge: ABB-I, Biotechnology department
+Hub Philosophy:
+To provide a platform for everyone who has music in their soul ,across streams and across years from various genres to collaborate musically in live performance sessions and showcase a combination of myriad musical influences, from Hindustani, Carnatic, and Indian folk to contemporary, hip-hop, rock & pop music.<br>
+
+OBJECTIVE
+
+-To inculcate the Spirit of Music in each one of us.<br>
+-Share our Knowledge and Skills<br>
+-Collaborateand Create<br>
+-BONUS : Spread Joyand Cheer!<br>
+</p>
+                    </div>
+<div class="club-image">
+                        <img src="C:\Users\anush\Downloads\music-hub9.jpg"
+                    </div>
+                </div>
+
+                <!-- Division 2: Last three clubs -->
+                <div id="club4" class="club">
+                    
+                    <div class="club-info">
+                        <h3>JIIT PROGRAMMING HUB</h3>
+                        <p>JIIT Programming Hub is one of the technical hubs/clubs of Department of Computer Science & Engineering and Information Technology, Noida. The prime objective of the JIIT Programming Hub is to develop the healthy, interactive and competitive programming environment for the JIIT Students.<br>
+
+Following are the two verticals under the umbrella of JIIT Programming Hub:<br>
+
+(1)KNUTH Programming Hub<br>
+
+(2)Open Source Developers Community<br>
+Introduction: KNUTH Programming Hub is one of the verticals of the JIIT Programming Hub (a technical hub of Dept. of CSE/IT). With the vision of enhancing the programming skills (C/C++/Java), logical skills (Data Structures/Algorithm), and problem solving skills (using the online judge platforms of HackerRank, CodeChef, HackerEarth, Codeforces, SPOJ, etc.) of the students, the hub was established in 2011. Since then, throughout the year, the programming hub is actively conducting the workshops, tutorials, hands-on, meet-ups, online weekly programming contests, onsite team based programming competitions, and onsite individual programming competitions to enhance the skills of the students. The hub also conducts special workshops for ICPC (formerly ACM ICPC) aspirants.
+
+Objective and Focus of KNUTH Programming Hub: Strengthen the Logical and Problem Solving Skills (Data Structures and Algorithms) using different programming languages (C/C++/JAVA). This skill is one of the essential skills to perform well in the On-Campus / Off-Campus placement drives of big companies, like Google, Microsoft, Amazon, Adobe, etc. Besides developing the problem solving skills for placement, the focus is also to perform well in prestigious International programming contests, like ACM ICPC.
+</p>
+                    </div>
+<div class="club-image">
+                        <img src="C:\Users\anush\Downloads\KNUTH-17.jpg" alt="Club 4 Image">
+                    </div>
+                </div>
+
+                <div id="club5" class="club">
+                    
+                    <div class="club-info">
+                        <h3>Parola</h3>
+                        <p>The academic year 2018-19 was a wonderful year for Parola- The literary hub of JIIT. Our flagship events The Joust and JMUN beat all previous benchmarks and outperformed our own expectations.
+
+The Joust, the literary fest of JIIT organised on September 22-23, 2018 hosted seven different events and witnessed a footfall of 500+ people. The literary fest saw participation from all the major colleges of Delhi NCR and rest of the country. The Joust constituted of a plethora of literary events that included debating, Committee simulations, poetry, journalism and creative writing. Named after the historic form of martial game, the event firmly believes in the inexhaustible power of words. Joust, known for its quality and diversity of events is one of the rare events in the circuit that conducts various MUN and Indian committees as well as one the most beautiful poetry competitions. This year a two day debating competition named Tarksangram was introduced with a prestigious rolling trophy.
+
+Joust 2018 surpassed all expectations and established itself as the most prestigious and awaited literary fest of the entire Delhi debating circuit. </p>
+                    </div>
+<div class="club-image">
+                        <img src="C:\Users\anush\Downloads\gallery-13_0.jpg">
+                    </div>
+                </div>
+
+                <div id="club6" class="club">
+                   
+                    <div class="club-info">
+                        <h3>Page Turner Society</h3>
+                        <p>To encourage the culture of reading books of different genres, conduct book exchanges, meeting authors, visiting book cafes etc. Understand the importance of literature in our society, in technical/ scientific environments and for enriched conversation and developing greater ideas.<br>
+
+Name of Faculty In-charge: Dr. Indira P. Sarethy <br>
+
+Designation and department of Faculty In-charge: Professor<br>
+
+</p>
+                    </div>
+ <div class="club-image">
+                        <img src="C:\Users\anush\Downloads\image 1.jpg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events">
+            <div class="events-frame">
+                <div class="event-info">
+                    <h2>Events held by the hubs</h2>
+<div class="clubs-container">
+<div id="club1" class="clubs">
+<div class="club-info">
+                   <h3><b>YOGA, PRAHARI & HEALTH HUB</b></h3>
+<p> The events organized by this hub are as follows: </p>
+<ul style="disc">
+<li>Young Oneless Leader</li>
+<li>Yoga in Stress Management</li>
+<li>Drug awareness -note campaign </li>
+</ul>
+</div>
+</div>
+<div id="club2" class="clubs">
+<div class="club-info">
+                   <h3><b>Radiance</b></h3>
+<p> The events organized by this hub are as follows: </p>
+<ul style="disc">
+<li>Mr and Ms Impressions </li>
+<li>Theme Walk</li>
+<li>MINI STARS </li>
+</ul>
+</div>
+</div>
+<div id="club3" class="clubs">
+<div class="club-info">
+                   <h3><b>Crescendo-Music Hub</b></h3>
+<p> The events organized by this hub are as follows: </p>
+<ul style="disc">
+<li>Unplugged : A musical night full of performances by students from every year.> </li>
+<li>Euphonium :a musical event especially for the instrumentalists to manifest their talents in the college</li>
+<li>Voice Of Impressions : an event for vocalists to show their skills and claim the spot of ‘voice of impressions’. </li>
+</ul>
+</div>
+</div>
+
+<div id="club4" class="clubs">
+<div class="club-info">
+                   <h3><b>JIIT Programming Hub</b></h3>
+<p> The events organized by this hub are as follows: </p>
+<ul style="disc">
+<li>Workshops/Meet-ups/Hands-on </li>
+<li>Programming Contest</li>
+<li>Hackathon </li>
+</ul>
+</div>
+</div>
+
+<div id="club5" class="clubs">
+<div class="club-info">
+                   <h3><b>Parola</b></h3>
+<p> The events organized by this hub are as follows: </p>
+<ul style="disc">
+<li>Tarksangram - The highlight of the fest was the two day debate that ensures a proper battle of words on topics such as outrage culture, religion, politics and various ideologies. </li>
+<li>The Press - Constituting of both journalists and photographers who were given assignments, the press ensured that the newsletter issued by the Joust maintained its quality as well as gave budding journalists, writers and photographers an amazing experience.</li>
+<li>United Nations Environmental Assembly - With the participants representing various countries, various environmental issues were debated upon and solutions were sought. </li>
+</ul>
+</div>
+</div>
+
+<div id="club6" class="clubs">
+<div class="club-info">
+                   <h3><b>Page Turner's Society</b></h3>
+<p> The events organized by this hub are as follows: </p>
+<ul style="disc">
+<li>Wordsmith Hunt </li>
+<li>Pic-a-boo</li>
+<li>Designing book covers </li>
+</ul>
+</div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+        <section id="join-club"> <!-- Updated "Join a Club" section -->
+            <div class="join-club-info">
+                <h2>Join a Club</h2>
+<div class="home-image1">
+    <img src="C:\Users\anush\Downloads\326490980_1651972038652722_1816712191872087423_n.jpg">
+</div>
+                <!-- Add content about how students can apply to clubs -->
+                <p>Interested in joining a club? Follow the steps below to apply:</p>
+                <ol>
+                    <li>Explore the list of clubs to find one that aligns with your interests.</li>
+                    <li>Contact the club leaders or attend club meetings to learn more.</li>
+                    <li>Submit your application through the online form or any specified method.</li>
+                    <li>Wait for confirmation from the club organizers.</li>
+                    <li>Congratulations! You are now a member of the club.</li>
+                </ol>
+If you are an admin click below to login.<br>
+<a href="http://localhost/CollegeProject/admin_login_form.php">Click here</a><br><br>
+                If you are a user and want to join a club Click Below.<br>
+               <a href="http://localhost/CollegeProject/ind.php">Click here</a>
+
+            </div>
+        </section>
+
+<div id="grid_col">
+
+<section id="about-us"> <!-- New section added -->
+            <h2>About Us</h2>
+            <div class="about-us-frame">
+               
+                    <p>Information about the college and its event organizing team.</p>
+                    <!-- Add more content as needed -->
+                
+                <!-- Add more about-us-info divs as needed -->
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <!-- Add content about how users can contact the college event organizers -->
+                <p>If you have any questions or inquiries, feel free to reach out to us:</p>
+                <ul>
+                    <li>Email: info@example.com</li>
+                    <li>Phone: (123) 456-7890</li>
+                    <!-- Add more contact information as needed -->
+                </ul>
+            </div>
+        </section>
+
+        <section id="location">
+            <div class="location-info">
+                <h2>Location</h2>
+                <!-- Add content about the location of the college -->
+                <p>Visit us at the following address:</p>
+                <address>
+                    College Event Organizer<br>
+                    123 College Street<br>
+                    City, State 12345<br>
+                    <!-- Add more address details as needed -->
+                </address>
+            </div>
+        </section>
+</div>
+
+    </main>
+
+    <div class="footer-container">
+        <footer>
+            <p>&copy; 2023 College Event Organizer. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Updated JavaScript for smooth scrolling -->
+     <script>
+        function toggleClubList() {
+            // Toggle the visibility of the club list
+            var clubList = document.getElementById("clubList");
+            clubList.style.display = (clubList.style.display === "none") ? "block" : "none";
+        }
+
+        function navigateToClub(clubId) {
+            // Scroll to the specified club in the Explore Clubs section
+            var targetClub = document.getElementById(clubId);
+            targetClub.scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            // Display only the information for the selected club and hide others
+            var allClubs = document.querySelectorAll('.club');
+allClubs.forEach(function (club) {
+    club.addEventListener('click', function() {
+        // Get the club ID
+        var clubId = club.id;
+
+        // Assuming your explore hubs and societies page is named "explore.html"
+        var explorePageURL = 'explore.html';
+
+        // Redirect to the explore page with the club ID as a query parameter
+        window.location.href = explorePageURL + '?clubId=' + encodeURIComponent(clubId);
+    });
+});
+
+        }
+    </script>
+
+</body>
+
+</html>
