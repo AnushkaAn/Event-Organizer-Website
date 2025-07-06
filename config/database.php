@@ -1,13 +1,10 @@
-<?php
-$host = 'localhost';
-$dbname = 'society_hub';
-$username = 'root';
-$password = '';
+$conn = mysqli_connect(
+    getenv("MYSQL_ADDON_HOST"),
+    getenv("MYSQL_ADDON_USER"),
+    getenv("MYSQL_ADDON_PASSWORD"),
+    getenv("MYSQL_ADDON_DB")
+);
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-?>
