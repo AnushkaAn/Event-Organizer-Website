@@ -1,3 +1,4 @@
+<?php
 $conn = mysqli_connect(
     getenv("MYSQL_ADDON_HOST"),
     getenv("MYSQL_ADDON_USER"),
@@ -8,3 +9,4 @@ $conn = mysqli_connect(
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+?>
